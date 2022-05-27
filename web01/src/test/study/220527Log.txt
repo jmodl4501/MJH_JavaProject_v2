@@ -1,0 +1,22 @@
+220527
+메이븐 프로젝트를 외부망에서 메이븐 업데이트를 했는데 다음과 같은 오류가 뜬다.
+
+(Maven clean, Maven install 했을 때 동일.)
+
+#오류
+[ERROR] The build could not read 1 project -> [Help 1]
+[ERROR]   
+[ERROR]   The project com.jm:JM:0.0.1-SNAPSHOT (D:\Project\WebApplicationWithJPA\JM\pom.xml) has 1 error
+[ERROR]     Non-resolvable parent POM for com.jm:JM:0.0.1-SNAPSHOT: Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.6.8 from/to central (https://repo.maven.apache.org/maven2): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target and 'parent.relativePath' points at no local POM @ line 5, column 10 -> [Help 2]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+[ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/UnresolvableModelException
+
+#해결방법: 인증서를 올바른 거로 넣으면 된다는데..(참고: https://bagagi.tistory.com/1008)
+안된다. 액세스가 거부되었다고 나온다.
+
+흐음.. 이참에 웹 mvc 공부나 해야겠다.
