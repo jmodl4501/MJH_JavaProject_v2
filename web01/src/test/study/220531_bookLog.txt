@@ -1,0 +1,13 @@
+p.78
+클라이언트 서버.
+
+실행방법: Run As > Run Application. 보안때문에 안되는건가.. "For assistance, contact your network support team." 라고 나오네.
+
+프로토콜 종류.
+FTP (File Transfer Protocol). 클라이언트, 서버간에 주고받는 통신 규약.
+Telnet 프로토콜: 인터넷, LAN상에서 원격컴퓨터 제어를 위한 통신 규약. 주로 SSH(Secure Shell)기반 원격프로그램에서 자주 사용한대요.
+XMPP: 인스턴스 메세지, 접속상태정보 교환을 위한 통신규약. 구글 talk에서 사용 중. (인스턴스 메세징: 두 명간 즉각적인 테이터 통신, 채팅같은 거), eXtensible Messaging and Presence Protocol)
+SMTP: 메일 보내기위한 통신규약. POP3로 이메일 가져오고 서버의 메일 삭제함. (Simple Mail Transfer Protocol)
+IMAP: POP3랑 다르게 서버에서 메일 삭제안함. 스마트폰, 태블릿 등 여러 장비에서 이메일 조회하는 데 적합. 대신 통신트래픽 많음. Internet Message Access Protocol)
+LDAP: 디렉토리 서비스에 등록된 자원들을 읽는 통신규약. Lightweight Directory Access Protocol
+IRC : 실시간 채팅을 위해 만들어진 통신규약. (Internet Relay Chat)
