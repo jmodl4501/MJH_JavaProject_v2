@@ -11,3 +11,5 @@ SMTP: 메일 보내기위한 통신규약. POP3로 이메일 가져오고 서버
 IMAP: POP3랑 다르게 서버에서 메일 삭제안함. 스마트폰, 태블릿 등 여러 장비에서 이메일 조회하는 데 적합. 대신 통신트래픽 많음. Internet Message Access Protocol)
 LDAP: 디렉토리 서비스에 등록된 자원들을 읽는 통신규약. Lightweight Directory Access Protocol
 IRC : 실시간 채팅을 위해 만들어진 통신규약. (Internet Relay Chat)
+
+http 송신확인은 크롬 개발자도구(request)에서 확인할 수 있음.
