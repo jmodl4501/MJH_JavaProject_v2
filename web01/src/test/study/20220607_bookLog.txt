@@ -12,12 +12,7 @@ GET.
 1. 보안이 안좋아서. 그대로 노출되니까!
 2. 바이너리 데이터 전송 못하니까! >이미지, 동영상 같은 파일을 바이너리 데이터라고 함. base64로 가능하지만, 문자화시켜야 하고 데이터가 크면 get으로 보내기 힘듬. 그러므로 get은 적합하지 않음. post로!
 
-POST? GET이랑 뭐가 다른데?
-1. URL에 데이터가 안드러남. → 보안성 우수.
-2. 메세지 본문에 데이터 포함 → 실행 결과 공유를 못함.
-3. 바이너리, 데이터 대용량전송 가능
-
-[로그]
+[MY DEVELOPMENT LOG]
 GET까지는 보냈는데, url링크를 찾지 못함.
 왜 그런가 싶어 봤더니 내 자바파일에 빨간 엑박이 떠있었음. 오류가 있다보니 컴파일되지 않은 것.
 WebServlet를 찾아보니 @WebServlet("/CalculatorServlet") 이런 식으로 java파일에 설정을 해놓으면 자동으로 찾아감.
@@ -28,5 +23,8 @@ WebServlet를 찾아보니 @WebServlet("/CalculatorServlet") 이런 식으로 ja
 (https://kamang-it.tistory.com/70
 https://kamang-it.tistory.com/entry/JSPjsp%EC%99%80-servlet%EC%9D%98-url%EB%A7%A4%ED%95%91endpoint-%EC%A7%80%EC%A0%95?category=711426)
 
-
-
+2.3. POST 요청
+POST? GET이랑 뭐가 다른데?
+1. URL에 데이터가 안드러남. → 보안성 우수.
+2. 메세지 본문에 데이터 포함 → 실행 결과 공유를 못함.
+3. 바이너리, 데이터 대용량전송 가능
