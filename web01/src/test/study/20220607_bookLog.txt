@@ -1,0 +1,32 @@
+20220607 bookLog.
+
+HTML 폼에서 GET으로 요청하려면?
+FORM 태그 안에 method = "get" 이라고 넣어주면 됨. (ex. <form action="CalculatorServlet" method="get">)
+[→GetText.html 참고]
+허나 기본적으로 설정되어 있어서 get은 생략해도 됨.
+
+get으로 보내고나면 이렇게 호출한다."http://localhost:8081/web01/CalculatorServlet?v1=123&op=%2B&v2=50"
+
+GET.
+-근데 왜 사람들은 get말고 post를 쓰지?
+1. 보안이 안좋아서. 그대로 노출되니까!
+2. 바이너리 데이터 전송 못하니까! >이미지, 동영상 같은 파일을 바이너리 데이터라고 함. base64로 가능하지만, 문자화시켜야 하고 데이터가 크면 get으로 보내기 힘듬. 그러므로 get은 적합하지 않음. post로!
+
+POST? GET이랑 뭐가 다른데?
+1. URL에 데이터가 안드러남. → 보안성 우수.
+2. 메세지 본문에 데이터 포함 → 실행 결과 공유를 못함.
+3. 바이너리, 데이터 대용량전송 가능
+
+[로그]
+GET까지는 보냈는데, url링크를 찾지 못함.
+왜 그런가 싶어 봤더니 내 자바파일에 빨간 엑박이 떠있었음. 오류가 있다보니 컴파일되지 않은 것.
+WebServlet를 찾아보니 @WebServlet("/CalculatorServlet") 이런 식으로 java파일에 설정을 해놓으면 자동으로 찾아감.
+(ex. localhost:8081/web01/CalculatorServlet?v1=123&op=%2B&v2=50 이런 식으로 java파일을 찾아간다는 소리)
+빨간 불 다 잡으니까 호출함! :)
+
++서블릿으로 호출하는 2번째 방법: web.xml 파일에 servlet 태그를 설정하면 @WebServlet 설정없이 호출 가능. jsp는 web.xml으로만 부를 수 있다고 함.
+(https://kamang-it.tistory.com/70
+https://kamang-it.tistory.com/entry/JSPjsp%EC%99%80-servlet%EC%9D%98-url%EB%A7%A4%ED%95%91endpoint-%EC%A7%80%EC%A0%95?category=711426)
+
+
+
