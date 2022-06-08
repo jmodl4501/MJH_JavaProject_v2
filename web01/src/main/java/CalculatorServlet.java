@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/CalculatorServlet")
 public class CalculatorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
 	private Hashtable<String, Operator> operatorTable = 
 			new Hashtable<String, Operator>();
 	
@@ -41,7 +40,7 @@ public class CalculatorServlet extends HttpServlet {
 		out.println("<html><body>");
 		out.println("<h1>계산 결과</h1>");
 		out.println("결과: ");
-		
+				
 		// 연산을 수행한 후 결과를 클라이언트로 출력한다.
 		try {
 			Operator operator = operatorTable.get(op);
