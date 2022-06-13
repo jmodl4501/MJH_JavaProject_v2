@@ -142,3 +142,30 @@ java.io.FileNotFoundException: D:\Project\MJH_JavaProject\.metadata\.plugins\org
 
 -------------
 [7. FileUploadServlet 분석]
+
+(1) serialVersionUID
+public class FileUploadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+...
+
+>serialVersionUID 용도	:	직렬화(Serialization)해줌. 요약하자면 [객체>바이트화>파일/메모리/DB]로 변환하는 걸 직렬화, [객체<바이트화<파일/메모리/DB] 순서로 역변환 하는 걸 역직렬화라고 하는데, [객체↔바이트화] 사이에서 클래스버전이 맞는지 확인하는 장치. 직렬화, 역직렬화 시 각 UID가 들어가므로, 해당 값이 안맞으면 Exception 뜨므로 설정하기를 권장
+>참조						:	https://blog.naver.com/kkson50/220564273220
+
+(2) 
+	@Override
+	protected void doPost(
+			HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<HTML><HEAD><TITLE>Multipart Test</TITLE></HEAD><BODY>");
+	...		
+
+>@Override?			:	@는 어노테이션(주석) JDK문법으로, 어떤 메서드가 부모로 부터 오버라이딩하겠다! 라는 선언.
+>오버로딩 vs 오버라이딩	:	오버로딩은 여러 시그니처의 메소드를 하나의 이름으로 정의하는 것. 오버라이딩은 부모 시그니처 메소드를 자식 시그니처 메소드로 다시 정의하는 것. private로 선언한 거 빼고 모두 상속받음. 그러니까 메소드 오버라이딩이라는 건 '부모 클래스 메소드 재정의해서 사용하는 걸' 말한다.
+ 
+ >참조				:	http://www.tcpschool.com/java/java_inheritance_overriding
+ 
+ 
+ 
