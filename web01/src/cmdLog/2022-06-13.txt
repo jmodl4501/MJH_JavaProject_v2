@@ -164,8 +164,14 @@ public class FileUploadServlet extends HttpServlet {
 
 >@Override?			:	@는 어노테이션(주석) JDK문법으로, 어떤 메서드가 부모로 부터 오버라이딩하겠다! 라는 선언.
 >오버로딩 vs 오버라이딩	:	오버로딩은 여러 시그니처의 메소드를 하나의 이름으로 정의하는 것. 오버라이딩은 부모 시그니처 메소드를 자식 시그니처 메소드로 다시 정의하는 것. private로 선언한 거 빼고 모두 상속받음. 그러니까 메소드 오버라이딩이라는 건 '부모 클래스 메소드 재정의해서 사용하는 걸' 말한다.
- 
- >참조				:	http://www.tcpschool.com/java/java_inheritance_overriding
- 
+>참조					:	http://www.tcpschool.com/java/java_inheritance_overriding
+
+>선언하는 것			: 인코딩, 콘텐츠타입. 그리고 response.getWriter(응답부분)에 태그 넣어줌.
+
+(3)
+	String contextRootPath = this.getServletContext().getRealPath("/");
+
+>this.getServletContext()	:	
+			
  
  
