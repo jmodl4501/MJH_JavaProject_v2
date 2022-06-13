@@ -1,0 +1,15 @@
+I am testing out maven and its capabilities
+나는 maven과 그 능력을 테스트 중이다.
+
+nesty 끔찍한
+upfront 미리
+detect 감지하다.
+trigger 방아쇠 (발동)
+deploying JAR manually is tedious and error-prone.
+JAR 수동배포는 지루하고 오류발생이 쉽다.
+
+you might not detect any error upfront but it will fail in production as soon as a new feature which is only available in commons-logging-1.1.2.jar is triggered. 
+너가 미리 에러를 감지하지 못할 수 있지만, 그건 'commons-logging-1.1.2.jar에서만 이용가능한 새 기능이 트리거되는 즉시 프로덕션 실패할거야.
+
+embed 포함시키다
+specify 지정하다

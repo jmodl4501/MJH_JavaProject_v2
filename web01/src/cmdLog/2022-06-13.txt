@@ -1,1 +1,144 @@
 2022-06-13  9:54:33.02>저장
+
+-목차
+[0.공부]
+[1.에러로그: org.apache.commons엑박]
+[2.서블릿 분석]
+[3.에러로그: 외부라이브러리 추가 후 서버 안띄워짐]
+[4.NoClassDefFoundError]
+[5. 뒤늦은 깨달음]
+[6. FileNotFoundException]
+[7. FileUploadServlet 분석]
+
+
+-------------
+[0.공부]
+97_GET이나 POST는 &로 파라메터 전달.
+파일을 전송하는 경우, name="photo", filename="220613.JPG"; 이런 식으로!
+
+로그인이나 결제정보같은 보안필요사항은 get으로 보내서는 안되고 post로 보내야만 함.
+
+-------------
+[1.에러로그: org.apache.commons엑박]
+org.apache.commons << 이놈 라이브러리에 없다고 엑박뜨길래
+구글에 "org.apache.commons" 검색하여 아래 사이트에서 다운로드.
+(https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload/1.3.3)
+바로 엑박 지워지더라 ~_~ 이렇게 라이브러리를 추가하는 거군.
+
+-------------
+[2.서블릿 분석]
+<form action="FileUploadServlet" method="post"
+		enctype="multipart/form-data">
+사진: <input type="file" name="photo"><br> 
+설명: <textarea name="description" cols="50" rows="3"></textarea><br>
+<input type="submit" value="추가"><br>
+
+* form action="FileUploadServlet"	: 이쪽 서블릿에서 실행시키겠다는 뜻. (@WebServlet="FileUploadServlet" 로 선언되어있는 자바로 이동)
+* method= "post"					: post방식으로 쓸거야!
+* enctype="multipart/form-data"		: 원래 디폴트는 "application/x-www-urlencoded'다.
+* 
+
+-------------
+[3.에러로그: 외부라이브러리 추가 후 서버 안띄워짐]
+
+정보: 프로덕션 환경들에서 최적의 성능을 제공하는, APR 기반 Apache Tomcat Native 라이브러리가, 다음 java.library.path에서 발견되지 않습니다: [D:\Project\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:/Project/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208/jre/bin/server;D:/Project/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208/jre/bin;C:\app\HIRA\product\18.0.0\dbhomeXE\bin;C:\Python\Python39;C:\Python\Python39\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Java\jdk-17.0.2\bin;C:\Users\HIRA\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\HIRA\AppData\Local\Programs\Python\Python39;C:\Users\HIRA\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;C:\Program Files\Java\jdk1.8.0_60\bin;D:\Project\eclipse;;.]
+Caused by: java.lang.NoClassDefFoundError: org/apache/commons/fileupload/FileItemFactory
+Caused by: java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory
+
+>원인:	톰캣 플러그인에 해당 클래스가 없어서 발생함.
+>해결방법:	[프로젝트 우클릭, Properties > Deployment Assembly > Add에서 외부라이브러리 추가 → 서버 클린 후 start
+>참조:	https://aljjabaegi.tistory.com/230
+>경과:	서버까지 띄워졌으나 해당html이 자바에 servlet넘어가고 동작하지 않음.
+
+-------------
+[4.NoClassDefFoundError]
+
+java.lang.ClassNotFoundException: org.apache.commons.io.IOUtils
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1364)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1187)
+	at org.apache.commons.fileupload.util.Streams.copy(Streams.java:123)
+	at org.apache.commons.fileupload.util.Streams.copy(Streams.java:70)
+	at org.apache.commons.fileupload.MultipartStream.readBodyData(MultipartStream.java:593)
+	at org.apache.commons.fileupload.MultipartStream.discardBodyData(MultipartStream.java:617)
+	at org.apache.commons.fileupload.MultipartStream.skipPreamble(MultipartStream.java:634)
+	at org.apache.commons.fileupload.FileUploadBase$FileItemIteratorImpl.findNextItem(FileUploadBase.java:1023)
+	at org.apache.commons.fileupload.FileUploadBase$FileItemIteratorImpl.<init>(FileUploadBase.java:1003)
+	at org.apache.commons.fileupload.FileUploadBase.getItemIterator(FileUploadBase.java:310)
+	at org.apache.commons.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:334)
+	at org.apache.commons.fileupload.servlet.ServletFileUpload.parseRequest(ServletFileUpload.java:115)
+	at FileUploadServlet.doPost(FileUploadServlet.java:38)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+>참조:	 	https://codechacha.com/ko/java-classnotfoundexception/
+>다운로드1:	https://commons.apache.org/proper/commons-io/download_io.cgi
+>다운로드2:	https://archive.apache.org/dist/commons/io/binaries/ => commons-io-1.0.tar.gz 알집 풀어서 jar추가.
+>경과		:	해결됨. 단, 또 다른 오류 발생 [5]
+>다운로드 import방법은 [3] 참조.
+    
+-------------
+[5. 뒤늦은 깨달음]
+>경로:		JavaWebProgramming\Lesson02\WebContent\WEB-INF\lib에 jar파일 2개 있었음..
+
+-------------
+[6. FileNotFoundException]
+
+java.io.FileNotFoundException: D:\Project\MJH_JavaProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp3\wtpwebapps\web01\upload\1655106338277.png (지정된 경로를 찾을 수 없습니다)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:293)
+	at java.base/java.io.FileOutputStream.(FileOutputStream.java:235)
+	at java.base/java.io.FileOutputStream.(FileOutputStream.java:184)
+	at org.apache.commons.fileupload.disk.DiskFileItem.write(DiskFileItem.java:423)
+	at FileUploadServlet.processUploadFile(FileUploadServlet.java:73)
+	at FileUploadServlet.doPost(FileUploadServlet.java:47)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+>원인:		jar의 경로문제. [External JARs]에서 jar를 추가하다보니 '.metadata' 쪽에서 정보를 가져오게 됨.
+>해결:		WEB-INF\lib에 jar파일 옮겨서 다시 불러옴. ([3] 참조) 혹시 몰라서 META-INF에 upload 디렉토리, WEB-INF에 temp 디렉토리 생성
+
+-------------
+[7. FileUploadServlet 분석]

@@ -73,7 +73,7 @@ MultipartTest.html 분석
 1) action="FileUploadServlet"		=> @Servlet="FileUploadServlet"으로 가서 파일을 가져온다.
 2) enctype="multipart/form-data"	=> 원래 디폴트는 "application/x-www-urlencoded'다.
 3) input type="file"				=> "file" 형식으로 받겠다는 거.
-------------------------------------------------------------------------
+------------------------------------------------------------------------2
 FileUploadServlet.java 에러
 1) 해당 라이브러리가 없음. Search repositories for 'org.apache.commons.fileupload에도 안뜸. (캡처: web01\src\test\study\220610_라이브러리없음.png)
 2) 필요한 라이브러리 웹 검색해서 다운로드. 나의 경우 프로젝트를 포함하는 bin폴더에 jar파일 풀었음. (https://hc.apache.org/downloads.cgi)
