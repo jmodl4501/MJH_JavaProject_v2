@@ -1,3 +1,4 @@
+-6.13.
 I am testing out maven and its capabilities
 나는 maven과 그 능력을 테스트 중이다.
 
@@ -13,3 +14,17 @@ you might not detect any error upfront but it will fail in production as soon as
 
 embed 포함시키다
 specify 지정하다
+
+-6.14.
+implementation: 구현
+instance (개발용어): 임의의 클래스나 프로세스에서 생성된 오브젝트를 가리킴. '실체'라고 이해하면 됨. 자바에서 new로 복제 생성한 임의의 클래스!
+threshold: 한계점
+
+서버 vs 인스턴스 = 서버는 물리개념, 인스턴스는 서비스개념
+클래스 vs 인스턴스 = 클래스는 붕어빵 틀, 인스턴스는 붕어빵 (실체). 추상화를 실체화한 것.
+
+The default FileItemFactory implementation.
+> 기본 FileItemFactory 구현.
+
+configurable: 구성가능한
+later on	: 나중에

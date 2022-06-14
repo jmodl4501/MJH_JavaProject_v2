@@ -57,9 +57,7 @@ public class FileUploadServlet extends HttpServlet {
 		out.println("</BODY></HTML>");
 	}
 
-	private void processUploadFile(
-			PrintWriter out, FileItem item, String contextRootPath) 
-			throws Exception {
+	private void processUploadFile(PrintWriter out, FileItem item, String contextRootPath) throws Exception {
 		String name = item.getFieldName();
 		String fileName = item.getName();
 		String contentType = item.getContentType();
