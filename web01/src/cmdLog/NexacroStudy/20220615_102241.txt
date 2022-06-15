@@ -1,0 +1,27 @@
+2022-06-15 10:22:41.99>fileCreate
+
+[1. 넥사크로 분석]
+
+@RequestMapping(value = {"/something.do"})
+@SuppressWarnings("unchecked")
+public NexacroResult something(NexacroMapDTO xpdto, NexacroResult result) throws Exception{
+	Map<String, Object> paramMap = xpdto.getMap("dsParam");
+	
+}
+
+@RequestMapping(value = {"/something.do"})
+→스프링프레임워크에서 특정메소드를 호출하기위해 uri를 요청함. 대표적으로 value와 method가 사용됨. method는 어떻게 받을지를 결정한다고.
+→method 어덯게 받을지?	: get, post, put, delete 등.
+→어떤 식으로 사용해?		: @RequestMapping(value = {"/something.do"}, method = RequestMethod.GET) 근데 이렇게 하나하나 하기 불편
+→그래서 value만 사용하고 그 하단부에 @GetMapping() | @PostMapping() ... 이런 식으로 선언해서 한꺼번에 사용한다고.
+→@RequestMapping은 클래스에만 붙일 수 있고, @GetMapping, @postMapping은 메서드, 클래스 모두 붙일 수 있다고.
+→@RequestMapping(value ={"/something"}) @GetMapping("/Get") 이라면 "/something /Get"으로 접근할 수 있다. 
+>참조[https://mungto.tistory.com/436] 
+
+@SuppressWarnings("unchecked")
+→쓸데없는 경고메세지 끄는거.(노란색 경고표시). unchecked는 검증되지 않은 연산자 관련 경고만 표시안한다고 함.
+>참조[https://yangyag.tistory.com/152]
+
+
+
+DTO - Data Transter Object. 계층 간 데이터 교환을 위한 자바빈즈.

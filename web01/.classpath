@@ -13,12 +13,37 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="lib" path="src/main/webapp/WEB-INF/lib/commons-fileupload-1.3.3.jar">
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-fileupload-1.3.3.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="src/main/webapp/WEB-INF/lib/commons-io-2.6.jar">
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-io-2.6.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Project/MJH_JavaProject_v2/web01/src/main/webapp/WEB-INF/lib/spring-context-5.2.22.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Project/MJH_JavaProject_v2/web01/src/main/webapp/WEB-INF/lib/spring-aop-5.2.22.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Project/MJH_JavaProject_v2/web01/src/main/webapp/WEB-INF/lib/spring-core-5.2.22.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Project/MJH_JavaProject_v2/web01/src/main/webapp/WEB-INF/lib/spring-web-5.2.22.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Project/MJH_JavaProject_v2/web01/src/main/webapp/WEB-INF/lib/api-1.7.2.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
