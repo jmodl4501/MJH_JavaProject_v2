@@ -1,1 +1,23 @@
 2022-06-17  8:48:13.55>fileCreate
+
+[1. eclipse TIP]
+[2. 프로젝트 로그]
+[3. 외부망 깨알 팁]
+
+-------------------------------------
+[1. eclipse TIP]
+ctrl + H		: 이클립스에서 xml문의 쿼리소스 쉽게 찾는방법
+shift + alt + R : 리팩토링 
+
+-------------------------------------
+[2. 프로젝트 개발계획 22.6.21.]
+ 1) 파일업로드시 applyservice.insertApply 로 접수번호가 따지면서 TBQYB010에 저장이 되는지 확인 (분석이 꽤나 필요할거임).
+ 2) TBQYB010의 TMP_UNI_RCV_NO를 TBQYK063에 INSERT.
+ 3) 자율상담봇 최초 로드시, 첨부파일을 불러올 수 있도록 TBQYK063 조회 메서드 만들기
+
+ - 참조1: /qyk/indvicss/indvInfrmSpotFileList.do
+ - 참조2: List<Map<String, Object>> dsFile = applyService.selectFilesIsRv(inMap);
+ - 참조3: List<Map<String, Object>> dsFile = applyService.selectFilesIsRv(inMap);
+-------------------------------------
+[3. 외부망 깨알 팁]
+ctrl+shift+V : 클립보드 PC파일전송시스템 내부망으로 옮기기
