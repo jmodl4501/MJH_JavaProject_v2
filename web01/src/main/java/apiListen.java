@@ -3,7 +3,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.json.JSONObject;
 
 public class apiListen {
 
@@ -14,8 +13,8 @@ public class apiListen {
 	private static void getJson() {
 		try {
 			String api_token 		= "";
-			String searchCompleteSD = "2022-06-01";
-			String searchCompleteED	= "2022-06-02";
+			String searchCompleteSD = "2022-06-28";
+			String searchCompleteED	= "2022-06-29";
 			String getUrl = "https://privacy.kda.or.kr/admin/agreement/answer_api.php"
 							+ "?api_token=" 		+ api_token 
 							+ "&searchCompleteSD="	+ searchCompleteSD
@@ -37,8 +36,8 @@ public class apiListen {
 				sb.append(line);
 			}
 			
-			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경
-			System.out.println("code = " + obj.getInt("code") + " / message= " + obj.getString("message"));
+			//JSONObject obj = new JSONObject(sb.toString()); // json으로 변경
+			//System.out.println("code = " + obj.getInt("code") + " / message= " + obj.getString("message"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
