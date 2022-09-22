@@ -5,6 +5,11 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -19,21 +24,54 @@ import org.json.simple.parser.JSONParser;
 public class apiListen {
 
 	public static void main(String[] args) {
-		getJson();
+		System.out.println(LocalTime.now() + "!!!!!!!!!!START!!!!!!!!!!");		
+		int startTime = LocalTime.now().getHour()*24 + LocalTime.now().getMinute() * 60 + LocalTime.now().getSecond();		
+		String[] recuClCd = {"31","41","81","93"};
+		for(int i = 0 ; recuClCd.length > i ; i ++) getJson(recuClCd[i]);
+		int EndTime = LocalTime.now().getHour()*24 + LocalTime.now().getMinute() * 60 + LocalTime.now().getSecond();
+		System.out.println(EndTime - startTime + "초 소요");
+		System.out.println(LocalTime.now() + "!!!!!!!!!!END!!!!!!!!!!");		
 	}
 
-	private static void getJson() {
+	private static void getJson(String recuClCd) {
 		try {
 			String api_token 		= "tAepjYM6f6AWf6GY";
-			String searchCompleteSD = "2022-06-28";
-			String searchCompleteED	= "2022-06-29";
-			String searchStep		= "7";
-			String getUrl = "https://privacy.kda.or.kr/admin/agreement/answer_api.php"
+			System.out.println("LocalDate.now().minusDays(1).toString()::" + LocalDate.now().minusDays(1).toString());			
+			String searchCompleteSD = LocalDate.now().minusDays(1).toString();
+			String searchCompleteED	= LocalDate.now().minusDays(1).toString();
+			String apiUrl 			= "";
+			
+			if("31".equals(recuClCd)) {
+				apiUrl = "https://privacy.kma.org/admin/agreement/answer_api.php";
+			}else if("41".equals(recuClCd)) {
+				apiUrl = "https://privacy.kda.or.kr/admin/agreement/answer_api.php";
+			}else if("81".equals(recuClCd)) {
+				apiUrl = "https://privacy.kpanet.or.kr/admin/agreement/answer_api.php";
+			}else if("93".equals(recuClCd)) {
+				apiUrl = "https://privacy.akom.org/admin/agreement/answer_api.php";
+			}
+			String searchStep		= "";			
+			if("31".equals(recuClCd)) {
+				searchStep			= "4";
+			}else if("41".equals(recuClCd)) {
+				searchStep			= "7";
+			}else if("81".equals(recuClCd)) {
+				searchStep			= "4";
+			}else if("93".equals(recuClCd)) {
+				searchStep			= "6";
+			}			
+			
+			String getUrl = apiUrl
+			
+//			String getUrl = 
+//			String getUrl = "https://privacy.akom.org/admin/agreement/answer_api.php"
+			
 							+ "?api_token=" 		+ api_token
-							+ "&agency="		+ searchStep							
-							+ "&searchStep="		+ searchStep							
+//							+ "&agency="		+ searchStep													
 							+ "&searchCompleteSD="	+ searchCompleteSD
-							+ "&searchCompleteED="	+ searchCompleteED;
+							+ "&searchCompleteED="	+ searchCompleteED
+							+ "&searchStep="		+ searchStep
+							;							
 			URL url = new URL(getUrl);
 			
 			TrustManager[] trustAllCerts = new TrustManager[] {
@@ -83,7 +121,6 @@ public class apiListen {
 			JSONArray arrData	= (JSONArray) obj.get("data");
 			System.out.println(sb.toString());
 			System.out.println("status= " + obj.get("status"));
-			
 			System.out.println("cntData= " + arrData.size());			
 			
 		} catch (Exception e) {
